@@ -18,7 +18,7 @@ function FormContainer() {
                 Submit
             </Button>
         </Form>
-    )
+    );
 }
 
 export default function LoginPage() {
