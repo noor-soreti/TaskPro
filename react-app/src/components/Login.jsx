@@ -1,48 +1,100 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import setBodyColor from '../style/bodyColour'
+import { Routes, Route, Link } from 'react-router-dom';
+import Register from './Register';
+import React, { useState } from 'react';
+import { collection, addDoc, getDoc, getDocs, doc, where } from "firebase/firestore";
+import { FormProvider, useForm, useFormContext } from 'react-hook-form'
+import { db } from '../../firebase'
+import { Input } from '../boilerplate/Input'
 
 
-function FormContainer() {
+
+// function FormContainer() {
+//     const [email, setEmail] = useState('')
+//     const [password, setPassword] = useState('')
+//     const [validated, setValidated] = useState(false);
+
+//     const submit = async (e) => {
+//         e.preventDefault();
+//         try {
+//             console.log(email);
+//             const q = query(collection(db, "users"), where("email", "==", email));
+//             const querySnapshot = await getDocs(q);
+//             querySnapshot.forEach((doc) => {
+//                 console.log(doc.id, " => ", doc.data());
+//             })
+//         } catch (e) {
+//             console.log("eek");
+//         }
+//     }
+
+
+
+export default function Login() {
+
+    const methods = useForm()
+
+    const onSubmit = methods.handleSubmit(data => {
+        console.log(data)
+    })
+    console.log(methods);
+
+
 
     return (
-        < >
-            <Form >
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
+        <div className='content ' >
+            <FormProvider {...methods} >
+                <form onSubmit={e => e.preventDefault()} className='   ' style={{ marginTop: '200px', backgroundColor: 'white', width: '50%', minWidth: '400px' }}>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
+                    <div className="mb-3 border rounded pt-4 pb-4 px-4">
+                        <p style={{ textAlign: 'center' }}>Login</p>
+                        <Input
+                            label="Email"
+                            type="email"
+                            id="email"
+                            placeholder="type your email..."
+                            validation={{ required: { value: true, message: 'Email required' } }}
 
-                <Button variant="primary" type="submit">
-                    Login
-                </Button>
-            </Form >
-        </ >
-    );
-}
+                        />
 
-export default function LoginPage() {
-    // setBodyColor({ color: "linear-gradient(to bottom right, rgba(255,225,2,21), rgba(255,225,252,21), rgba(255,225,2,21))" })
-    // setBodyColor({ color: 'linear-gradient(135deg, #ffec61, #f321d7)' })
-    return (
-        <div class='content'>
-            <div>
-                <h2 style={{ fontStyle: 'poppin, sans-serif', fontSize: '4em' }}>name.</h2>
+                        <Input
+                            label="Password"
+                            type="password"
+                            id="password"
+                            placeholder="type your password..."
+                            validation={{ required: { value: true, message: 'Password required' } }}
+                        />
+
+                        <button className='' onClick={onSubmit} style={{ width: '100%' }}>Submit</button>
+
+
+                    </div>
+
+                </form>
+            </FormProvider>
+            <div className='content'>
+                <Link to="/register">Register</Link>
+                <Link to="forgot-password">Forgot Password</Link>
             </div>
-            <div className='border pt-5 pb-5 pe-4 ps-4 rounded' style={{ marginTop: '100px', backgroundColor: 'white', width: '75%' }}>
-                <FormContainer />
-            </div>
-            <div className='d-grid'>
-                <Button variant='link'>Forgot Password?</Button>
-                <Button variant='link '>Register</Button>
-            </div>
-
+            <Routes>
+                <Route path='/register' element={<Register />} />
+            </Routes>
         </div>
+
+        // <div className='content'>
+        //     <div>
+        //         <h2 style={{ fontStyle: 'poppin, sans-serif', fontSize: '4em' }}>name.</h2>
+        //     </div>
+        //     <div className='border pt-5 pb-5 pe-4 ps-4 rounded' style={{ marginTop: '100px', backgroundColor: 'white', width: '75%' }}>
+        //         <FormContainer />
+        //     </div>
+        // <div className='d-grid '>
+        //     <Link to="/register">Register</Link>
+        //     <Link to="forgot-password">Forgot Password</Link>
+        // </div>
+        // <Routes>
+        //     <Route path='/register' element={<Register />} />
+        // </Routes>
+        // </div>
 
     );
 }

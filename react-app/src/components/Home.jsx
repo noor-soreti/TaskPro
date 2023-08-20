@@ -5,21 +5,10 @@ import NavBar from "./NavBar";
 
 
 // USE STATE TO RENDER
-export default function HomePage() {
+export default function Home() {
     return (
+        <>
 
-        <Container >
-            <Row >
-                <NavBar />
-            </Row>
-            <Row>
-                <Col>
-                    dksjfld
-                </Col>
-                <Col xs={10}>
-                    dksjfld
-                </Col>
-            </Row>
-        </Container>
+        </>
     );
 }
