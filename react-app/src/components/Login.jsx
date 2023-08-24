@@ -1,49 +1,42 @@
 import { Routes, Route, Link } from 'react-router-dom';
 import Register from './Register';
 import React, { useState } from 'react';
-import { collection, addDoc, getDoc, getDocs, doc, where } from "firebase/firestore";
-import { FormProvider, useForm, useFormContext } from 'react-hook-form'
-import { db } from '../../firebase'
+import { collection, addDoc, getDoc, getDocs, where } from "firebase/firestore";
+import { FormProvider, useForm } from 'react-hook-form'
+import { signIn, user, signOut } from '../../authentication'
 import { Input } from '../boilerplate/Input'
 
-
-
-// function FormContainer() {
-//     const [email, setEmail] = useState('')
-//     const [password, setPassword] = useState('')
-//     const [validated, setValidated] = useState(false);
-
-//     const submit = async (e) => {
-//         e.preventDefault();
-//         try {
-//             console.log(email);
-//             const q = query(collection(db, "users"), where("email", "==", email));
-//             const querySnapshot = await getDocs(q);
-//             querySnapshot.forEach((doc) => {
-//                 console.log(doc.id, " => ", doc.data());
-//             })
-//         } catch (e) {
-//             console.log("eek");
-//         }
-//     }
-
-
-
-export default function Login() {
-
+export default function Login({ setIsLoggedIn }) {
     const methods = useForm()
+    const [loginInfo, setLoginInfo] = useState(false)
 
-    const onSubmit = methods.handleSubmit(data => {
-        console.log(data)
+    // const onSubmit = methods.handleSubmit(data => {
+    //     console.log(data)
+    // })
+
+    const onSubmit = methods.handleSubmit(async (e) => {
+        signOut()
+        // const signinUser = await signIn(e.email, e.password)
+        // console.log(signinUser);
+
+
+        // try {
+        //     const querySnapshot = await getDocs(collection(db, "users"));
+        //     querySnapshot.forEach((doc) => {
+        //         if (doc.data().email == e.email && doc.data().password == e.password) {
+        //             console.log("YES");
+        //             setIsLoggedIn(true)
+        //         } else {
+        //             setLoginInfo(true)
+        //         }
+        //     })
+        // } catch (e) {
+        // }
     })
-    console.log(methods);
-
-
-
     return (
         <div className='content ' >
             <FormProvider {...methods} >
-                <form onSubmit={e => e.preventDefault()} className='   ' style={{ marginTop: '200px', backgroundColor: 'white', width: '50%', minWidth: '400px' }}>
+                <form onSubmit={e => e.preventDefault()} style={{ marginTop: '200px', backgroundColor: 'white', width: '50%', minWidth: '400px' }}>
 
                     <div className="mb-3 border rounded pt-4 pb-4 px-4">
                         <p style={{ textAlign: 'center' }}>Login</p>
@@ -53,9 +46,7 @@ export default function Login() {
                             id="email"
                             placeholder="type your email..."
                             validation={{ required: { value: true, message: 'Email required' } }}
-
                         />
-
                         <Input
                             label="Password"
                             type="password"
@@ -63,10 +54,8 @@ export default function Login() {
                             placeholder="type your password..."
                             validation={{ required: { value: true, message: 'Password required' } }}
                         />
-
                         <button className='' onClick={onSubmit} style={{ width: '100%' }}>Submit</button>
-
-
+                        {loginInfo && (<p>Whoops! Something went wrong</p>)}
                     </div>
 
                 </form>
@@ -79,22 +68,6 @@ export default function Login() {
                 <Route path='/register' element={<Register />} />
             </Routes>
         </div>
-
-        // <div className='content'>
-        //     <div>
-        //         <h2 style={{ fontStyle: 'poppin, sans-serif', fontSize: '4em' }}>name.</h2>
-        //     </div>
-        //     <div className='border pt-5 pb-5 pe-4 ps-4 rounded' style={{ marginTop: '100px', backgroundColor: 'white', width: '75%' }}>
-        //         <FormContainer />
-        //     </div>
-        // <div className='d-grid '>
-        //     <Link to="/register">Register</Link>
-        //     <Link to="forgot-password">Forgot Password</Link>
-        // </div>
-        // <Routes>
-        //     <Route path='/register' element={<Register />} />
-        // </Routes>
-        // </div>
 
     );
 }

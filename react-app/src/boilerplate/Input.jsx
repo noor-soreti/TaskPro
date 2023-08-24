@@ -8,7 +8,6 @@ export const Input = ({ label, type, id, placeholder, validation }) => {
 
     const iError = InputError(errors, id);
 
-
     return (
         <div className="flex flex-col w-full gap-2  " >
             <div >
@@ -26,8 +25,6 @@ export const Input = ({ label, type, id, placeholder, validation }) => {
                     aria-invalid={errors.id ? "true" : "false"}
                     style={{ border: 'none', borderBottom: '1rem', backgroundColor: ' #F6F5F5' }}
                 />
-
-
             </div>
             <p>{iError.error?.message}</p>
         </div>
@@ -36,12 +33,10 @@ export const Input = ({ label, type, id, placeholder, validation }) => {
 
 function InputError(error, id) {
     const filtered = Object.keys(error)
-        .filter(key => key.includes(id.charAt(0).toUpperCase() + id.slice(1)))
+        .filter(key => key.includes(id))
         .reduce((cur, key) => {
             return Object.assign(cur, { error: error[key] })
         }, {})
-
-
 
     return filtered
 }

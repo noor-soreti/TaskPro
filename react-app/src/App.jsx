@@ -9,6 +9,7 @@ import LoginPage from './components/Login'
 import HomePage from './components/Home'
 import Register from './components/Register';
 import Reset from './components/Reset';
+import Wrapper from './components/Wrapper';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,7 +18,7 @@ function App() {
 
     <>
       <Routes>
-        <Route path='/' element={<LoginPage />} />
+        <Route path='/' element={<Wrapper />} />
         <Route path='/register' element={<Register />} />
         <Route path='/reset-password' element={<Reset />} />
         <Route path='/home' element={<HomePage />} />
