@@ -5,6 +5,7 @@ import { collection, addDoc, getDoc, getDocs, where } from "firebase/firestore";
 import { FormProvider, useForm } from 'react-hook-form'
 import { signIn, user, signOut } from '../../authentication'
 import { Input } from '../boilerplate/Input'
+import { db } from '../../firebase'
 
 export default function Login({ setIsLoggedIn }) {
     const methods = useForm()
@@ -15,7 +16,9 @@ export default function Login({ setIsLoggedIn }) {
     // })
 
     const onSubmit = methods.handleSubmit(async (e) => {
-        signOut()
+
+        console.log(db);
+        // signOut()
         // const signinUser = await signIn(e.email, e.password)
         // console.log(signinUser);
 
