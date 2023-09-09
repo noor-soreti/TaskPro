@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 const auth = getAuth();
 export const user = auth.currentUser;
 
-console.log(user);
 
 onAuthStateChanged(auth, (user) => {
     if (user !== null) {
