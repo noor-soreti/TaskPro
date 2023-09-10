@@ -6,18 +6,21 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { signIn, user, signOut } from '../../authentication'
 import { Input } from '../boilerplate/Input'
 import { db } from '../../firebase'
+import { useQuery, useMutation } from '@apollo/client';
+import { TEST_QUERY } from '../apollo/queries'
 
 export default function Login({ setIsLoggedIn }) {
     const methods = useForm()
     const [loginInfo, setLoginInfo] = useState(false)
 
-    // const onSubmit = methods.handleSubmit(data => {
-    //     console.log(data)
-    // })
+    const { name: lastName } = "nems"
+
+
+    const { loading, error, data } = useQuery(TEST_QUERY)
+
 
     const onSubmit = methods.handleSubmit(async (e) => {
 
-        console.log(db);
         // signOut()
         // const signinUser = await signIn(e.email, e.password)
         // console.log(signinUser);
