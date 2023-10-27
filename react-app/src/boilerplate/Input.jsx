@@ -26,7 +26,7 @@ export const Input = ({ label, type, id, placeholder, validation }) => {
                     style={{ border: 'none', borderBottom: '1rem', backgroundColor: ' #F6F5F5' }}
                 />
             </div>
-            <p>{iError.error?.message}</p>
+            <p style={{ color: 'red' }} >{iError.error?.message}</p>
         </div>
     )
 }
