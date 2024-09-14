@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // with 'client', we are now ready to start fetching data
 const client = new ApolloClient({

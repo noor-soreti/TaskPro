@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react'
 import './App.css'
-import client from './apollo/apollo.jsx'
+// import client from './apollo/apollo.jsx'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -15,16 +15,18 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-
-    <ApolloProvider client={client} >
-
-      <Routes>
-        <Route path='/' element={<Wrapper />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/reset-password' element={<Reset />} />
-        <Route path='/home' element={<HomePage />} />
-      </Routes>
-    </ApolloProvider>
+      <div>
+          <p>kdjflskjfl</p>
+      </div>
+    // <ApolloProvider client={client} >
+    //     <p>Hello</p>
+    //   <Routes>
+    //     <Route path='/' element={<Wrapper />} />
+    //     <Route path='/register' element={<Register />} />
+    //     <Route path='/resetPassword' element={<Reset />} />
+    //     <Route path='/home' element={<HomePage />} />
+    //   </Routes>
+    // </ApolloProvider>
   )
 }
 

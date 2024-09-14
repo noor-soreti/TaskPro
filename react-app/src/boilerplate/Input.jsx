@@ -1,7 +1,7 @@
 import { useFormContext } from "react-hook-form"
 
 
-export const Input = ({ label, type, id, placeholder, validation }) => {
+export const Input = ({ label, type, id, placeholder, validation, refInput }) => {
     const {
         register,
         formState: { errors } } = useFormContext()
@@ -18,6 +18,7 @@ export const Input = ({ label, type, id, placeholder, validation }) => {
             <div className="d-flex justify-content-center  ">
                 <input
                     {...register(id, validation)}
+                    ref={node => {refInput = node}}
                     id={id}
                     type={type}
                     className=" flex-fill w-full p-1 font-medium placeholder:opacity-60 rounded"

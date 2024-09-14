@@ -3,7 +3,6 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, on
 const auth = getAuth();
 export const user = auth.currentUser;
 
-
 onAuthStateChanged(auth, (user) => {
     if (user !== null) {
         console.log(user);
@@ -17,16 +16,16 @@ export function createUser(email, password) {
         .then((userCredential) => {
             const user = userCredential.user
         }).catch((e) => {
-            console.log(e);
+            console.log("Register user ERROR: ", e);
         })
 }
 
 export function signIn(email, password) {
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
         }).catch((e) => {
-            console.log(e);
+            console.log("Sign in ERROR: ", e);
         })
 }
 
@@ -35,6 +34,6 @@ export function signOut() {
         .then(() => {
             console.log('SIGNED OUT');
         }).catch((e) => {
-            console.log("sign out ERROR");
+            console.log("sign out ERROR: ", e);
         })
 }
